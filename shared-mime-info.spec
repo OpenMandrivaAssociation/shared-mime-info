@@ -1,16 +1,12 @@
 Name:		shared-mime-info
-Version: 0.20
-Release: %mkrel 6
+Version: 0.21
+Release: %mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
 URL:		http://www.freedesktop.org/software/shared-mime-info
 Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
-# (fc) 0.19-2mdv fix real media detection
-Patch0:		shared-mime-info-0.20-real.patch
-# (fc) 0.20-3mdv update raw digicam files, based on ufraw list
-Patch1:		shared-mime-info-0.20-raw.patch
 # gw add *.lzma pattern
 Patch2:		shared-mime-info-0.20-lzma.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -44,8 +40,6 @@ format and merging them together.
 
 %prep
 %setup -q
-%patch0 -p1 -b .real
-%patch1 -p1 -b .raw
 %patch2 -p1 -b .lzma
 
 %build
