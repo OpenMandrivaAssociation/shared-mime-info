@@ -8,7 +8,7 @@ URL:		http://www.freedesktop.org/software/shared-mime-info
 Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
 # gw add *.lzma pattern
-Patch2:		shared-mime-info-0.20-lzma.patch
+Patch2:		shared-mime-info-0.21-lzma.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
 BuildRequires:	glib2-devel
@@ -40,7 +40,7 @@ format and merging them together.
 
 %prep
 %setup -q
-%patch2 -p1 -b .lzma
+%patch2 -p1 -b .lzma_mime
 
 %build
 %configure2_5x --disable-update-mimedb
