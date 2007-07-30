@@ -1,6 +1,6 @@
 Name:		shared-mime-info
-Version:	0.21
-Release:	%mkrel 5
+Version:	0.22
+Release:	%mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
@@ -9,10 +9,6 @@ Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
 # gw add *.lzma pattern
 Patch2:		shared-mime-info-0.21-lzma.patch
-# (fc) 0.21-4mdv add video/avi alias (CVS)
-Patch3:		shared-mime-info-0.21-avi.patch
-# (fc) 0.21-4mdv add more ogg mimetypes
-Patch4:		shared-mime-info-0.21-ogg.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
 BuildRequires:	glib2-devel
@@ -45,8 +41,6 @@ format and merging them together.
 %prep
 %setup -q
 %patch2 -p1 -b .lzma_mime
-%patch3 -p1 -b .avi
-%patch4 -p1 -b .ogg
 
 %build
 %configure2_5x --disable-update-mimedb
