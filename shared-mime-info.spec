@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.22
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
@@ -9,8 +9,13 @@ Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
 # gw add *.lzma pattern
 Patch2:		shared-mime-info-0.21-lzma.patch
+# (fc) 0.22-2mdv bugfixes from CVS + testcase
+Patch3:		shared-mime-info-0.22-cvsfixes.patch
+# (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
+Patch4:		shared-mime-info-0.22-vhdl.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
+BuildRequires:  libxml2-utils
 BuildRequires:	glib2-devel
 BuildRequires:  intltool
 
@@ -41,6 +46,12 @@ format and merging them together.
 %prep
 %setup -q
 %patch2 -p1 -b .lzma_mime
+%patch3 -p1 -b .cvsfixes
+%patch4 -p1 -b .vhdl
+
+#needed by patch3
+intltoolize --force
+autoreconf
 
 %build
 %configure2_5x --disable-update-mimedb
@@ -61,6 +72,9 @@ touch $RPM_BUILD_ROOT%{_datadir}/mime/{XMLnamespaces,aliases,globs,magic,subclas
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%check
+make check
 
 %post
 %update_mime_database
