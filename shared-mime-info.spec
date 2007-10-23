@@ -1,12 +1,14 @@
 Name:		shared-mime-info
 Version:	0.22
-Release:	%mkrel 3
+Release:	%mkrel 4
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
 URL:		http://www.freedesktop.org/software/shared-mime-info
 Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
+# gw fix bug #34988 (html files identified as mozilla bookmarks)
+Patch: shared-mime-info-revert-netscape-bookmarks.patch
 # gw add *.lzma pattern
 Patch2:		shared-mime-info-0.21-lzma.patch
 # (fc) 0.22-2mdv bugfixes from CVS + testcase
@@ -45,6 +47,7 @@ format and merging them together.
 
 %prep
 %setup -q
+%patch -p0
 %patch2 -p1 -b .lzma_mime
 %patch3 -p1 -b .cvsfixes
 %patch4 -p1 -b .vhdl
