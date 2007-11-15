@@ -9,7 +9,7 @@ Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
 # gw fix bug #34988 (html files identified as mozilla bookmarks)
 Patch: shared-mime-info-revert-netscape-bookmarks.patch
-# gw add *.lzma pattern
+# gw add *.lzma pattern (fd.o bug #13256)
 Patch2:		shared-mime-info-0.21-lzma.patch
 # (fc) 0.22-2mdv bugfixes from CVS + testcase
 Patch3:		shared-mime-info-0.22-cvsfixes.patch
