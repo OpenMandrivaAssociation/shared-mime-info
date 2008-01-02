@@ -15,6 +15,7 @@ Patch2:		shared-mime-info-0.21-lzma.patch
 Patch3:		shared-mime-info-0.22-cvsfixes.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.22-vhdl.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
 BuildRequires:  libxml2-utils
 BuildRequires:	glib2-devel
