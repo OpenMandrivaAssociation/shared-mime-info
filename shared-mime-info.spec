@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.22
-Release:	%mkrel 4
+Release:	%mkrel 5
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
@@ -15,6 +15,7 @@ Patch2:		shared-mime-info-0.21-lzma.patch
 Patch3:		shared-mime-info-0.22-cvsfixes.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.22-vhdl.patch
+Patch5:         shared-mime-info-0.22-office2007.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
 BuildRequires:  libxml2-utils
@@ -51,6 +52,7 @@ format and merging them together.
 %patch2 -p1 -b .lzma_mime
 %patch3 -p1 -b .cvsfixes
 %patch4 -p1 -b .vhdl
+%patch5 -p1 -b .office2007
 
 #needed by patch3
 intltoolize --force
