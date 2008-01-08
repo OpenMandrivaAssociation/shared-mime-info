@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.22
-Release:	%mkrel 5
+Release:	%mkrel 6
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
