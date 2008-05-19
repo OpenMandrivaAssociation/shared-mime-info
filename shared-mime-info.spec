@@ -1,16 +1,14 @@
 Name:		shared-mime-info
-Version:	0.23
-Release:	%mkrel 2
+Version:	0.30
+Release:	%mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
-URL:		http://www.freedesktop.org/software/shared-mime-info
+URL:		http://www.freedesktop.org/wiki/Software/shared-mime-info
 Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
-# gw add *.lzma pattern (fd.o bug #13256)
-Patch2:		shared-mime-info-0.21-lzma.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
-Patch4:		shared-mime-info-0.22-vhdl.patch
+Patch4:		shared-mime-info-0.30-vhdl.patch
 Patch5:         shared-mime-info-0.22-office2007.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
@@ -44,7 +42,6 @@ format and merging them together.
 
 %prep
 %setup -q
-%patch2 -p1 -b .lzma_mime
 %patch4 -p1 -b .vhdl
 %patch5 -p1 -b .office2007
 
