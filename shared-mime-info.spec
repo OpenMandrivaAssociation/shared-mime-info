@@ -1,5 +1,5 @@
 Name:		shared-mime-info
-Version:	0.40
+Version:	0.51
 Release:	%mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
@@ -10,7 +10,7 @@ Source1:	defaults.list
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.30-vhdl.patch
 # add OOXML file detection (fd.o bug #13904)
-Patch5:         shared-mime-info-0.22-office2007.patch
+Patch5:         shared-mime-info-0.51-office2007.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
 BuildRequires:  libxml2-utils
