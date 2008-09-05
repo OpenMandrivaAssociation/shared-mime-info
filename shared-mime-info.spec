@@ -1,12 +1,14 @@
 Name:		shared-mime-info
 Version:	0.51
-Release:	%mkrel 2
+Release:	%mkrel 3
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
 URL:		http://www.freedesktop.org/wiki/Software/shared-mime-info
 Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
+# KDE 4 overrides.
+Source2:	mimeapps.list
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.30-vhdl.patch
 # add OOXML file detection (fd.o bug #13904)
@@ -55,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/applications
+install -m 644 %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/applications
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/mime/{application,image,message,multipart,text,audio,inode,model,packages,video}
 
 touch $RPM_BUILD_ROOT%{_datadir}/mime/{XMLnamespaces,aliases,globs,magic,subclasses,mime.cache}
@@ -94,6 +96,7 @@ make check
 %_bindir/update-mime-database
 %dir %{_datadir}/mime/
 %{_datadir}/applications/defaults.list
+%{_datadir}/applications/mimeapps.list
 %dir %{_datadir}/mime/application  
 %dir %{_datadir}/mime/image  
 %dir %{_datadir}/mime/message  
