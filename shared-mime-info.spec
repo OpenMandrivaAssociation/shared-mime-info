@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.60
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
@@ -9,6 +9,7 @@ Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
 Source1:	defaults.list
 # KDE 4 overrides.
 Source2:	mimeapps.list
+Patch0: shared-mime-info-xz.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.30-vhdl.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -43,6 +44,7 @@ format and merging them together.
 
 %prep
 %setup -q
+%patch0 -p1 -b .xz
 %patch4 -p1 -b .vhdl
 
 %build
