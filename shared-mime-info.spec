@@ -1,6 +1,6 @@
 Name:		shared-mime-info
-Version:	0.60
-Release:	%mkrel 3
+Version:	0.70
+Release:	%mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
@@ -44,7 +44,7 @@ format and merging them together.
 
 %prep
 %setup -q
-%patch0 -p1 -b .xz
+%patch0 -p0 -b .xz
 %patch4 -p1 -b .vhdl
 
 %build
