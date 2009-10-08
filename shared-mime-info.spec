@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.70
-Release:	%mkrel 2
+Release:	%mkrel 3
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
@@ -15,8 +15,9 @@ Patch4:		shared-mime-info-0.30-vhdl.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
 BuildRequires:  libxml2-utils
-BuildRequires:	glib2-devel >= 2.22.2-1
+BuildRequires:	glib2-devel
 BuildRequires:  intltool
+Conflicts:      glib2.0 < 2.22.2
 
 
 %description
