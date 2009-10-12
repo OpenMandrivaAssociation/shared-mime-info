@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.70
-Release:	%mkrel 3
+Release:	%mkrel 4
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPL
@@ -17,8 +17,6 @@ BuildRequires:	libxml2-devel
 BuildRequires:  libxml2-utils
 BuildRequires:	glib2-devel
 BuildRequires:  intltool
-Conflicts:      glib2.0 < 2.22.2
-
 
 %description
 This is the freedesktop.org shared MIME info database.
