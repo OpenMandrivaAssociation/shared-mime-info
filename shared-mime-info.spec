@@ -1,5 +1,5 @@
 Name:		shared-mime-info
-Version:	0.71
+Version:	0.80
 Release:	%mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
@@ -12,7 +12,7 @@ Source1:	defaults.list
 Source2:	mimeapps.list
 Patch0: shared-mime-info-xz.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
-Patch4:		shared-mime-info-0.71-vhdl.patch
+Patch4:		shared-mime-info-0.80-vhdl.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	libxml2-devel
 BuildRequires:  libxml2-utils
