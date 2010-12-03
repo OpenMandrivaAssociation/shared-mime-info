@@ -1,5 +1,5 @@
 Name:		shared-mime-info
-Version:	0.80
+Version:	0.90
 Release:	%mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
@@ -49,7 +49,8 @@ format and merging them together.
 
 %build
 %configure2_5x --disable-update-mimedb
-%make
+#gw parallel make fails in 0.90
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
