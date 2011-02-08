@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.90
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -65,19 +65,6 @@ touch $RPM_BUILD_ROOT%{_datadir}/mime/{XMLnamespaces,aliases,globs,magic,subclas
 ## remove these bogus files
 %{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/locale/*
 
-# automatic mime database update on rpm installs/removals
-# (see http://wiki.mandriva.com/en/Rpm_filetriggers)
-install -d %buildroot%{_var}/lib/rpm/filetriggers
-cat > %buildroot%{_var}/lib/rpm/filetriggers/mime-database.filter << EOF
-^./usr/share/mime/packages/[^/]*\.xml$
-EOF
-cat > %buildroot%{_var}/lib/rpm/filetriggers/mime-database.script << EOF
-#!/bin/sh
-/usr/bin/update-mime-database /usr/share/mime > /dev/null
-EOF
-chmod 755 %buildroot%{_var}/lib/rpm/filetriggers/mime-database.script
-
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -89,6 +76,9 @@ make check
 
 %triggerun -- shared-mime-info < 0.20-3mdv
 %update_mime_database
+
+%triggerin -- %{_datadir}/mime/packages/*.xml
+%{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
 
 %files
 %defattr (-,root,root)
@@ -116,6 +106,3 @@ make check
 %{_datadir}/mime/packages/freedesktop.org.xml
 %_mandir/man1/update-mime-database.1*
 %_datadir/pkgconfig/shared-mime-info.pc
-%{_var}/lib/rpm/filetriggers/mime-database.*
-
-
