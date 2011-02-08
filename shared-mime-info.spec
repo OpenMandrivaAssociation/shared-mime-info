@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.90
-Release:	%mkrel 3
+Release:	%mkrel 4
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -72,10 +72,10 @@ rm -rf $RPM_BUILD_ROOT
 make check
 
 %post
-%update_mime_database
+%{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
 
 %triggerun -- shared-mime-info < 0.20-3mdv
-%update_mime_database
+%{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
 
 %triggerpostin -- %{_datadir}/mime/packages/*.xml
 %{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
@@ -90,15 +90,15 @@ make check
 %dir %{_datadir}/mime/
 %{_datadir}/applications/defaults.list
 %{_datadir}/applications/mimeapps.list
-%dir %{_datadir}/mime/application  
-%dir %{_datadir}/mime/image  
-%dir %{_datadir}/mime/message  
-%dir %{_datadir}/mime/multipart  
+%dir %{_datadir}/mime/application
+%dir %{_datadir}/mime/image
+%dir %{_datadir}/mime/message
+%dir %{_datadir}/mime/multipart
 %dir %{_datadir}/mime/text
-%dir %{_datadir}/mime/audio        
-%dir %{_datadir}/mime/inode  
-%dir %{_datadir}/mime/model    
-%dir %{_datadir}/mime/packages   
+%dir %{_datadir}/mime/audio
+%dir %{_datadir}/mime/inode
+%dir %{_datadir}/mime/model
+%dir %{_datadir}/mime/packages
 %dir %{_datadir}/mime/video
 %ghost %{_datadir}/mime/XMLnamespaces
 %ghost %{_datadir}/mime/aliases
