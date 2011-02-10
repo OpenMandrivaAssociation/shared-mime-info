@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.90
-Release:	%mkrel 4
+Release:	%mkrel 5
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -77,7 +77,7 @@ make check
 %triggerun -- shared-mime-info < 0.20-3mdv
 %{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
 
-%triggerpostin -- %{_datadir}/mime/packages/*.xml
+%triggerin -- %{_datadir}/mime/packages/*.xml
 %{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
 
 %triggerpostun -- %{_datadir}/mime/packages/*.xml
