@@ -1,12 +1,12 @@
 Name:		shared-mime-info
-Version:	0.90
-Release:	%mkrel 8
+Version:	0.91
+Release:	%mkrel 1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
 License:	GPL+ and LGPLv2+
 URL:		http://www.freedesktop.org/wiki/Software/shared-mime-info
-Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
+Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
 Source1:	defaults.list
 # KDE 4 overrides.
 Source2:	mimeapps.list
