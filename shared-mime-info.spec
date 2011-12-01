@@ -53,20 +53,20 @@ format and merging them together.
 make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-install -m 644 %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/applications
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/mime/{application,image,message,multipart,text,audio,inode,model,packages,video}
+mkdir -p %{buildroot}%{_datadir}/applications
+install -m 644 %{SOURCE1} %{SOURCE2} %{buildroot}%{_datadir}/applications
+mkdir -p %{buildroot}%{_datadir}/mime/{application,image,message,multipart,text,audio,inode,model,packages,video}
 
-touch $RPM_BUILD_ROOT%{_datadir}/mime/{XMLnamespaces,aliases,globs,magic,subclasses,mime.cache}
+touch %{buildroot}%{_datadir}/mime/{XMLnamespaces,aliases,globs,magic,subclasses,mime.cache}
 
 ## remove these bogus files
-%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/locale/*
+%{__rm} -rf %{buildroot}%{_datadir}/locale/*
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %check
 make check
