@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	0.91
-Release:	%mkrel 1
+Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -13,7 +13,7 @@ Source2:	mimeapps.list
 Patch0: shared-mime-info-xz.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.80-vhdl.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+
 BuildRequires:	libxml2-devel
 BuildRequires:  libxml2-utils
 BuildRequires:	glib2-devel
@@ -44,11 +44,12 @@ format and merging them together.
 
 %prep
 %setup -q
-%patch0 -p1 -b .xz
-%patch4 -p1 -b .vhdl
+%apply_patches
 
 %build
-%configure2_5x --disable-update-mimedb
+%configure2_5x \
+	--disable-update-mimedb
+
 #gw parallel make fails in 0.90
 make
 
@@ -63,10 +64,7 @@ mkdir -p %{buildroot}%{_datadir}/mime/{application,image,message,multipart,text,
 touch %{buildroot}%{_datadir}/mime/{XMLnamespaces,aliases,globs,magic,subclasses,mime.cache}
 
 ## remove these bogus files
-%{__rm} -rf %{buildroot}%{_datadir}/locale/*
-
-%clean
-rm -rf %{buildroot}
+rm -rf %{buildroot}%{_datadir}/locale/*
 
 %check
 make check
@@ -81,10 +79,11 @@ make check
 %{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
 
 %triggerpostun -- %{_datadir}/mime/packages/*.xml
+if [ -x %{_bindir}/update-mime-database ]; then
 %{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
+fi
 
 %files
-%defattr (-,root,root)
 %doc README shared-mime-info-spec.xml NEWS
 %_bindir/update-mime-database
 %dir %{_datadir}/mime/
@@ -109,3 +108,4 @@ make check
 %{_datadir}/mime/packages/freedesktop.org.xml
 %_mandir/man1/update-mime-database.1*
 %_datadir/pkgconfig/shared-mime-info.pc
+
