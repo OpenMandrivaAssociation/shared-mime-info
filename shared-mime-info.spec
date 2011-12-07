@@ -85,7 +85,7 @@ fi
 
 %files
 %doc README shared-mime-info-spec.xml NEWS
-%_bindir/update-mime-database
+%{_bindir}/update-mime-database
 %dir %{_datadir}/mime/
 %{_datadir}/applications/defaults.list
 %{_datadir}/applications/mimeapps.list
@@ -106,6 +106,6 @@ fi
 %ghost %{_datadir}/mime/subclasses
 %ghost %{_datadir}/mime/mime.cache
 %{_datadir}/mime/packages/freedesktop.org.xml
-%_mandir/man1/update-mime-database.1*
-%_datadir/pkgconfig/shared-mime-info.pc
+%{_mandir}/man1/update-mime-database.1*
+%{_datadir}/pkgconfig/shared-mime-info.pc
 
