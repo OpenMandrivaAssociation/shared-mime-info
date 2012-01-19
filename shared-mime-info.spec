@@ -1,6 +1,6 @@
 Name:		shared-mime-info
-Version:	0.91
-Release:	2
+Version:	1.0
+Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
