@@ -1,6 +1,6 @@
 Name:		shared-mime-info
 Version:	1.0
-Release:	1
+Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -14,10 +14,10 @@ Patch0: shared-mime-info-xz.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.80-vhdl.patch
 
-BuildRequires:	libxml2-devel
-BuildRequires:  libxml2-utils
-BuildRequires:	glib2-devel
 BuildRequires:  intltool
+BuildRequires:  libxml2-utils
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(glib-2.0)
 
 %description
 This is the freedesktop.org shared MIME info database.
@@ -54,7 +54,6 @@ format and merging them together.
 make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 mkdir -p %{buildroot}%{_datadir}/applications
