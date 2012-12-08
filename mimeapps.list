@@ -1,0 +1,4 @@
+[Added Associations]
+application/xhtml+xml=firefox.desktop;kde4-kfmclient_html.desktop;kde4-kwrite.desktop;gedit.desktop;writer.desktop;
+text/html=firefox.desktop;kde4-kfmclient_html.desktop;kde4-kwrite.desktop;writer.desktop;
+inode/directory=kde4-dolphin.desktop;kde4-kfmclient_dir.desktop;
