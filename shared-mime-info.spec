@@ -10,7 +10,7 @@ Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
 Source1:	defaults.list
 # KDE 4 overrides.
 Source2:	mimeapps.list
-Patch0:		shared-mime-info-xz.patch
+#Patch0:		shared-mime-info-xz.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch4:		shared-mime-info-0.80-vhdl.patch
 BuildRequires:	libxml2-devel
@@ -43,7 +43,7 @@ format and merging them together.
 
 %prep
 %setup -q
-%patch0 -p1 -b .xz
+#patch0 -p1 -b .xz
 %patch4 -p1 -b .vhdl
 
 %build
