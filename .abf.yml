@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   shared-mime-info-1.0.tar.xz: 146dbad62f5450116b0353f88bb8e700f0034013
+sources:
+  shared-mime-info-1.1.tar.xz: 752668b0cc5729433c99cbad00f21241ec4797ef
