@@ -1,3 +1,5 @@
+%define _disable_ld_no_undefined 1
+ 
 Name:		shared-mime-info
 Version:	1.3
 Release:	1
