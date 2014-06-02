@@ -43,6 +43,14 @@ to avoid inconsistencies between desktops. This database has been
 created by converting the existing KDE and GNOME databases to the new
 format and merging them together.
 
+%package devel
+Summary:	development files for %{name}
+Group:		Development/Other
+Requires:	%{name} = %{EVRD}
+
+%description devel
+Development files for %{name}.
+
 %prep
 %setup -q
 #patch0 -p1 -b .xz
@@ -105,4 +113,6 @@ make check
 %ghost %{_datadir}/mime/mime.cache
 %{_datadir}/mime/packages/freedesktop.org.xml
 %_mandir/man1/update-mime-database.1*
+
+%files devel
 %_datadir/pkgconfig/shared-mime-info.pc
