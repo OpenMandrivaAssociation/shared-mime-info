@@ -2,7 +2,7 @@
  
 Name:		shared-mime-info
 Version:	1.3
-Release:	2
+Release:	3
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
