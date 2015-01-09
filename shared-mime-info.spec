@@ -1,8 +1,8 @@
 %define _disable_ld_no_undefined 1
- 
+
 Name:		shared-mime-info
 Version:	1.3
-Release:	4
+Release:	5
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -12,9 +12,15 @@ Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
 Source1:	defaults.list
 # KDE 4 overrides.
 Source2:	mimeapps.list
-#Patch0:		shared-mime-info-xz.patch
+Patch0:		shared-mime-info-1.3-x-iso9660-image.patch
+# support PKGSYSTEM_ENABLE_FSYNC
+# https://bugs.freedesktop.org/show_bug.cgi?id=70366#c30
+Patch1:		0007-Split-out-fdatasync-usage.patch
+Patch2:		0008-Disable-fdatasync-usage-if-PKGSYSTEM_ENABLE_FSYNC-is.patch
+Patch3:		0013-Skip-mime-database-update-if-packages-are-older-than.patch
+Patch4:		0014-Add-n-option-to-update-mime-database.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
-Patch4:		shared-mime-info-0.80-vhdl.patch
+Patch5:		shared-mime-info-0.80-vhdl.patch
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
@@ -47,20 +53,20 @@ format and merging them together.
 Summary:	development files for %{name}
 Group:		Development/Other
 Requires:	%{name} = %{EVRD}
+Conflicts:	%{name} < 1.3
 
 %description devel
 Development files for %{name}.
 
 %prep
 %setup -q
-#patch0 -p1 -b .xz
-%patch4 -p1 -b .vhdl
+%apply_patches
 
 %build
 %configure \
 	--disable-update-mimedb
 
-%make 
+%make
 
 %install
 %makeinstall_std
@@ -84,10 +90,10 @@ make check
 %{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
 
 %triggerin -- %{_datadir}/mime/packages/*.xml
-%{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
+%{_bindir}/update-mime-database -n %{_datadir}/mime > /dev/null
 
 %triggerpostun -- %{_datadir}/mime/packages/*.xml
-%{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
+%{_bindir}/update-mime-database -n %{_datadir}/mime > /dev/null
 
 %files
 %doc README shared-mime-info-spec.xml NEWS
