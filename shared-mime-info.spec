@@ -13,12 +13,6 @@ Source1:	defaults.list
 # KDE 4 overrides.
 Source2:	mimeapps.list
 Patch0:		shared-mime-info-1.3-x-iso9660-image.patch
-# support PKGSYSTEM_ENABLE_FSYNC
-# https://bugs.freedesktop.org/show_bug.cgi?id=70366#c30
-Patch1:		0007-Split-out-fdatasync-usage.patch
-Patch2:		0008-Disable-fdatasync-usage-if-PKGSYSTEM_ENABLE_FSYNC-is.patch
-Patch3:		0013-Skip-mime-database-update-if-packages-are-older-than.patch
-Patch4:		0014-Add-n-option-to-update-mime-database.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch5:		shared-mime-info-0.80-vhdl.patch
 BuildRequires:	pkgconfig(libxml-2.0)
