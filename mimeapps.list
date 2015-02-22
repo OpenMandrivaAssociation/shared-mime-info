@@ -1,4 +1,4 @@
 [Added Associations]
-application/xhtml+xml=firefox.desktop;chromium-browser.desktop;qupzilla.desktop;rekonq.desktop;kde4-kfmclient_html.desktop;kate.desktop;kwrite.desktop;gedit.desktop;libreoffice-writer.desktop;
-text/html=firefox.desktop;chromium-browser.desktop;qupzilla.desktop;rekonq.desktop;kde4-kfmclient_html.desktop;kate.desktop;kwrite.desktop;libreoffice-writer.desktop;
+application/xhtml+xml=firefox.desktop;chromium-browser.desktop;qupzilla.desktop;rekonq.desktop;kde4-kfmclient_html.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;gedit.desktop;libreoffice-writer.desktop;
+text/html=firefox.desktop;chromium-browser.desktop;qupzilla.desktop;rekonq.desktop;kde4-kfmclient_html.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;libreoffice-writer.desktop;
 inode/directory=dolphin.desktop;pcmanfm-qt.desktop;kde4-kfmclient_dir.desktop;
