@@ -1,0 +1,40 @@
+#!/bin/bash
+# Run a sanity check on default lists -- we need to catch things
+# like kate and kwrite going missing from the available options
+# because their desktop file was renamed (kate.desktop/kwrite.desktop
+# in KDE4 vs. org.kde.kate.desktop/org.kde.kwrite.desktop in Plasma 5)
+# in a more automated way.
+#
+# We can't fully automate the check because that would mean adding
+# build dependencies on anything we want to list in defaults lists to
+# shared-mime-info -- including stuff that lives in contrib, restricted
+# or non-free.
+#
+# But let's give packagers a tool to make spotting mistakes easier...
+# (A failure doesn't necessarily mean there's something wrong with
+# the file -- it just means it should be double-checked).
+#
+# (C) 2015 Bernhard Rosenkränzer <bero@lindev.ch>
+# Released under the GPLv3
+
+cd "`dirname $0`"
+( for i in defaults.list mimeapps.list; do
+	cat $i |while read r; do
+		[ "`echo $r |cut -b1`" = "[" ] && continue
+		[ "`echo $r |cut -b1`" = "#" ] && continue
+		echo $r |grep -q = || continue
+		M="`echo $r |cut -d= -f1`"
+		A="`echo $r |cut -d= -f2-`"
+		IFS=';' eval 'a=($A)'
+		for i in $a; do
+			if [ "`find /usr/share/applications -name $i |wc -l`" = "0" ]; then
+				echo "$i"
+			fi
+		done
+	done
+done ) | sort | uniq |while read f; do
+	echo Nonexistant desktop file $f referenced by:
+	grep -E "[=;]$f(;.*)?$" defaults.list mimeapps.list |cut -d= -f1 |while read e; do
+		echo "	$e"
+	done
+done

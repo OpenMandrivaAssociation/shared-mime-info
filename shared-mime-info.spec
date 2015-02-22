@@ -2,7 +2,7 @@
 
 Name:		shared-mime-info
 Version:	1.4
-Release:	3
+Release:	4
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -12,6 +12,9 @@ Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
 Source1:	defaults.list
 # KDE 4 overrides.
 Source2:	mimeapps.list
+# Not used automatically, but useful to maintainers.
+# See comments in the file.
+Source100:	sanity-check
 Patch0:		shared-mime-info-1.3-x-iso9660-image.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch5:		shared-mime-info-0.80-vhdl.patch
