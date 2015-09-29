@@ -15,7 +15,6 @@ Source2:	mimeapps.list
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
-Patch0:		shared-mime-info-1.3-x-iso9660-image.patch
 # (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
 Patch5:		shared-mime-info-0.80-vhdl.patch
 BuildRequires:	pkgconfig(libxml-2.0)
