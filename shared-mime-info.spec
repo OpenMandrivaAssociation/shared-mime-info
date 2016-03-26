@@ -2,7 +2,7 @@
 
 Name:		shared-mime-info
 Version:	1.6
-Release:	1
+Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -10,7 +10,7 @@ License:	GPL+ and LGPLv2+
 URL:		http://www.freedesktop.org/wiki/Software/shared-mime-info
 Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
 Source1:	defaults.list
-# KDE 4 overrides.
+# KDE Plasma overrides.
 Source2:	mimeapps.list
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
@@ -60,7 +60,7 @@ Development files for %{name}.
 
 %build
 %configure \
-	--disable-update-mimedb
+    --disable-update-mimedb
 
 %make
 
@@ -93,7 +93,7 @@ make check
 
 %files
 %doc README shared-mime-info-spec.xml NEWS
-%_bindir/update-mime-database
+%{_bindir}/update-mime-database
 %dir %{_datadir}/mime/
 %{_datadir}/applications/defaults.list
 %{_datadir}/applications/mimeapps.list
@@ -114,7 +114,7 @@ make check
 %ghost %{_datadir}/mime/subclasses
 %ghost %{_datadir}/mime/mime.cache
 %{_datadir}/mime/packages/freedesktop.org.xml
-%_mandir/man1/update-mime-database.1*
+%{_mandir}/man1/update-mime-database.1*
 
 %files devel
-%_datadir/pkgconfig/shared-mime-info.pc
+%{_datadir}/pkgconfig/shared-mime-info.pc
