@@ -1,7 +1,7 @@
 %define _disable_ld_no_undefined 1
 
 Name:		shared-mime-info
-Version:	1.7
+Version:	1.8
 Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
