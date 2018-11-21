@@ -2,7 +2,7 @@
 
 Name:		shared-mime-info
 Version:	1.10
-Release:	2
+Release:	3
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -56,16 +56,16 @@ Development files for %{name}.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 %configure \
     --disable-update-mimedb
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 mkdir -p %{buildroot}%{_datadir}/applications
 install -m 644 %{SOURCE1} %{SOURCE2} %{buildroot}%{_datadir}/applications
