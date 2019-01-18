@@ -1,8 +1,8 @@
 %define _disable_ld_no_undefined 1
 
 Name:		shared-mime-info
-Version:	1.10
-Release:	3
+Version:	1.12
+Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -55,8 +55,7 @@ Conflicts:	%{name} < 1.3
 Development files for %{name}.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
 %configure \
