@@ -2,7 +2,7 @@
 
 Name:		shared-mime-info
 Version:	1.12
-Release:	1
+Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 #gw main is GPL, test program is LGPL
@@ -21,6 +21,7 @@ BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	intltool
+Requires(post): /bin/sh
 
 %description
 This is the freedesktop.org shared MIME info database.
