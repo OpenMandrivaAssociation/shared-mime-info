@@ -17,6 +17,7 @@ BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	intltool
+BuildRequires:	itstool
 Requires(post):	/bin/sh
 
 %description
