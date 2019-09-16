@@ -17,17 +17,17 @@
 # (C) 2015 Bernhard Rosenkränzer <bero@lindev.ch>
 # Released under the GPLv3
 
-cd "`dirname $0`"
+cd "$(dirname $0)"
 ( for i in defaults.list mimeapps.list; do
 	cat $i |while read r; do
-		[ "`echo $r |cut -b1`" = "[" ] && continue
-		[ "`echo $r |cut -b1`" = "#" ] && continue
+		[ "$(echo $r |cut -b1)" = "[" ] && continue
+		[ "$(echo $r |cut -b1)" = "#" ] && continue
 		echo $r |grep -q = || continue
-		M="`echo $r |cut -d= -f1`"
-		A="`echo $r |cut -d= -f2-`"
+		M="$(echo $r |cut -d= -f1)"
+		A="$(echo $r |cut -d= -f2-)"
 		IFS=';' eval 'a=($A)'
 		for i in $a; do
-			if [ "`find /usr/share/applications -name $i |wc -l`" = "0" ]; then
+			if [ "$(find /usr/share/applications -name $i |wc -l)" = "0" ]; then
 				echo "$i"
 			fi
 		done

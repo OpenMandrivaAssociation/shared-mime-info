@@ -1,5 +1,3 @@
-%define _disable_ld_no_undefined 1
-
 Name:		shared-mime-info
 Version:	1.13.1
 Release:	1
@@ -15,13 +13,11 @@ Source2:	mimeapps.list
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
-# (fc) 0.22-2mdv fix VHDL vs CRT magic detection (Mdv bug #31603)
-Patch5:		shared-mime-info-0.80-vhdl.patch
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	intltool
-Requires(post): /bin/sh
+Requires(post):	/bin/sh
 
 %description
 This is the freedesktop.org shared MIME info database.
