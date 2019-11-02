@@ -1,5 +1,5 @@
 Name:		shared-mime-info
-Version:	1.13.1
+Version:	1.15
 Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
