@@ -1,23 +1,28 @@
+%global __requires_exclude ^/usr/bin/pkg-config$
+
 Name:		shared-mime-info
-Version:	1.15
+Version:	2.1
 Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
-#gw main is GPL, test program is LGPL
-License:	GPL+ and LGPLv2+
-URL:		http://www.freedesktop.org/wiki/Software/shared-mime-info
-Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.xz
-Source1:	defaults.list
+License:	GPLv2+
+URL:		http://freedesktop.org/Software/shared-mime-info
+Source0:	https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/%{version}/%{name}-%{version}.tar.xz
+# Tarball for https://gitlab.freedesktop.org/xdg/xdgmime/-/tree/6663a2288d11b37bc07f5a01b4b85dcd377787e1
+Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/master/xdgmime-master.tar.gz
+Source2:	defaults.list
 # KDE Plasma overrides.
-Source2:	mimeapps.list
+Source3:	mimeapps.list
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
+
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	intltool
+BuildRequires:	meson
 BuildRequires:	itstool
+BuildRequires:	xmlto
 Requires(post):	/bin/sh
 
 %description
@@ -55,63 +60,54 @@ Development files for %{name}.
 %prep
 %autosetup -p1
 
-%build
-%configure \
-    --disable-update-mimedb
+tar -xzf %{SOURCE1}
+mv xdgmime-*/ xdgmime
 
-%make_build
+%build
+%make_build -C xdgmime
+# the updated mimedb is later owned as %%ghost to ensure proper file-ownership
+# it also asserts it is possible to build it
+%meson -Dupdate-mimedb=true -Dxdg-mime-path=./xdgmime/
+	
+%meson_build
 
 %install
-%make_install
+%meson_install
+
+find %{buildroot}%{_datadir}/mime -type d \
+| sed -e "s|^%{buildroot}|%%dir |" > %{name}.files
+find %{buildroot}%{_datadir}/mime -type f -not -path "*/packages/*" \
+| sed -e "s|^%{buildroot}|%%ghost |" >> %{name}.files
 
 mkdir -p %{buildroot}%{_datadir}/applications
-install -m 644 %{SOURCE1} %{SOURCE2} %{buildroot}%{_datadir}/applications
-mkdir -p %{buildroot}%{_datadir}/mime/{application,image,message,multipart,text,audio,inode,model,packages,video}
-
-touch %{buildroot}%{_datadir}/mime/{XMLnamespaces,aliases,globs,magic,subclasses,mime.cache}
+install -m 644 %{SOURCE2} %{SOURCE3} %{buildroot}%{_datadir}/applications
 
 ## remove these bogus files
 rm -rf %{buildroot}%{_datadir}/locale/*
 
 %check
-make check
+%meson_test
 
 %post
-%{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
+/bin/touch --no-create %{_datadir}/mime/packages &>/dev/null ||:
 
-%triggerun -- shared-mime-info < 0.20-3mdv
-%{_bindir}/update-mime-database %{_datadir}/mime > /dev/null
+%triggerin -- %{_datadir}/mime
+%{_bindir}/update-mime-database -n %{_datadir}/mime &>/dev/null ||:
 
-%triggerin -- %{_datadir}/mime/packages/*.xml
-%{_bindir}/update-mime-database -n %{_datadir}/mime > /dev/null
+%triggerpostun -- %{_datadir}/mime
+[ -x %{_bindir}/update-mime-database ] && %{_bindir}/update-mime-database -n %{_datadir}/mime &>/dev/null ||:
 
-%triggerpostun -- %{_datadir}/mime/packages/*.xml
-%{_bindir}/update-mime-database -n %{_datadir}/mime > /dev/null
-
-%files
+%files -f %{name}.files
 %doc README shared-mime-info-spec.xml NEWS
 %{_bindir}/update-mime-database
-%dir %{_datadir}/mime/
+%dir %{_datadir}/mime
+%dir %{_datadir}/mime/packages
 %{_datadir}/applications/defaults.list
 %{_datadir}/applications/mimeapps.list
-%dir %{_datadir}/mime/application
-%dir %{_datadir}/mime/image
-%dir %{_datadir}/mime/message
-%dir %{_datadir}/mime/multipart
-%dir %{_datadir}/mime/text
-%dir %{_datadir}/mime/audio
-%dir %{_datadir}/mime/inode
-%dir %{_datadir}/mime/model
-%dir %{_datadir}/mime/packages
-%dir %{_datadir}/mime/video
-%ghost %{_datadir}/mime/XMLnamespaces
-%ghost %{_datadir}/mime/aliases
-%ghost %{_datadir}/mime/globs
-%ghost %{_datadir}/mime/magic
-%ghost %{_datadir}/mime/subclasses
-%ghost %{_datadir}/mime/mime.cache
 %{_datadir}/mime/packages/freedesktop.org.xml
 %{_mandir}/man1/update-mime-database.1*
 
 %files devel
 %{_datadir}/pkgconfig/shared-mime-info.pc
+%{_datadir}/gettext/its/shared-mime-info.its
+%{_datadir}/gettext/its/shared-mime-info.loc
