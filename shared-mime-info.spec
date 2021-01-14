@@ -64,6 +64,7 @@ tar -xzf %{SOURCE1}
 mv xdgmime-*/ xdgmime
 
 %build
+%set_build_flags
 %make_build -C xdgmime
 # the updated mimedb is later owned as %%ghost to ensure proper file-ownership
 # it also asserts it is possible to build it
