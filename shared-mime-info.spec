@@ -98,7 +98,7 @@ rm -rf %{buildroot}%{_datadir}/locale/*
 [ -x %{_bindir}/update-mime-database ] && %{_bindir}/update-mime-database -n %{_datadir}/mime &>/dev/null ||:
 
 %files -f %{name}.files
-%doc README shared-mime-info-spec.xml NEWS
+%doc NEWS
 %{_bindir}/update-mime-database
 %dir %{_datadir}/mime
 %dir %{_datadir}/mime/packages
