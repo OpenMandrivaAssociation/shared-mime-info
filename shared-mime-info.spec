@@ -2,7 +2,7 @@
 
 Name:		shared-mime-info
 Version:	2.1
-Release:	1
+Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
@@ -92,11 +92,11 @@ rm -rf %{buildroot}%{_datadir}/locale/*
 %post
 /bin/touch --no-create %{_datadir}/mime/packages &>/dev/null ||:
 
-%triggerin -- %{_datadir}/mime
-%{_bindir}/update-mime-database -n %{_datadir}/mime &>/dev/null ||:
+%transfiletriggerin -- %{_datadir}/mime
+update-mime-database -n %{_datadir}/mime &> /dev/null ||:
 
-%triggerpostun -- %{_datadir}/mime
-[ -x %{_bindir}/update-mime-database ] && %{_bindir}/update-mime-database -n %{_datadir}/mime &>/dev/null ||:
+%transfiletriggerpostun -- %{_datadir}/mime
+update-mime-database -n %{_datadir}/mime &> /dev/null ||:
 
 %files -f %{name}.files
 %doc NEWS
