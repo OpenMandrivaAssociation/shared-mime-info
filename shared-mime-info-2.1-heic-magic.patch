@@ -1,0 +1,30 @@
+diff -up shared-mime-info-2.1/data/freedesktop.org.xml.in.omv~ shared-mime-info-2.1/data/freedesktop.org.xml.in
+--- shared-mime-info-2.1/data/freedesktop.org.xml.in.omv~	2021-02-06 18:40:57.986620218 +0100
++++ shared-mime-info-2.1/data/freedesktop.org.xml.in	2021-02-06 18:40:36.183340112 +0100
+@@ -4678,6 +4678,12 @@ command to generate the output files.
+     <expanded-acronym>High Efficiency Image File</expanded-acronym>
+     <glob pattern="*.heic"/>
+     <glob pattern="*.heif"/>
++    <magic priority="50">
++        <match type="string" value="heic" offset="8"/>
++    </magic>
++    <magic priority="50">
++        <match type="string" value="mif1" offset="8"/>
++    </magic>
+     <alias type="image/heic"/>
+     <alias type="image/heic-sequence"/>
+     <alias type="image/heif-sequence"/>
+diff -up shared-mime-info-2.1/tests/mime-detection/list.omv~ shared-mime-info-2.1/tests/mime-detection/list
+--- shared-mime-info-2.1/tests/mime-detection/list.omv~	2021-02-06 18:46:13.335527125 +0100
++++ shared-mime-info-2.1/tests/mime-detection/list	2021-02-06 18:46:19.825497781 +0100
+@@ -19,8 +19,8 @@ GammaChart.exr image/x-exr
+ test.fit image/fits x
+ test.fli video/x-flic ox
+ test.gif image/gif
+-example.heic image/heif ox
+-example.heif image/heif ox
++example.heic image/heif
++example.heif image/heif
+ test.ico image/vnd.microsoft.icon
+ # From https://bugs.freedesktop.org/show_bug.cgi?id=20070#c3
+ test.ilbm image/x-ilbm

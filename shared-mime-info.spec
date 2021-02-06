@@ -2,13 +2,13 @@
 
 Name:		shared-mime-info
 Version:	2.1
-Release:	2
+Release:	3
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
 URL:		http://freedesktop.org/Software/shared-mime-info
 Source0:	https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/%{version}/%{name}-%{version}.tar.xz
-# Tarball for https://gitlab.freedesktop.org/xdg/xdgmime/-/tree/6663a2288d11b37bc07f5a01b4b85dcd377787e1
+# Tarball for https://gitlab.freedesktop.org/xdg/xdgmime/-/tree/cecafc8cd5cd725444b914d5f6cd17308633afa8
 Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/master/xdgmime-master.tar.gz
 Source2:	defaults.list
 # KDE Plasma overrides.
@@ -16,6 +16,7 @@ Source3:	mimeapps.list
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
+Patch0:		shared-mime-info-2.1-heic-magic.patch
 
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
