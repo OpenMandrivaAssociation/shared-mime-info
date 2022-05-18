@@ -1,14 +1,14 @@
 %global __requires_exclude ^/usr/bin/pkg-config$
 
 Name:		shared-mime-info
-Version:	2.1
-Release:	3
+Version:	2.2
+Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
 URL:		http://freedesktop.org/Software/shared-mime-info
-Source0:	https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/%{version}/%{name}-%{version}.tar.xz
-# Tarball for https://gitlab.freedesktop.org/xdg/xdgmime/-/tree/cecafc8cd5cd725444b914d5f6cd17308633afa8
+Source0:	https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/%{version}/%{name}-%{version}.tar.bz2
+# Tarball for https://gitlab.freedesktop.org/xdg/xdgmime/-/commit/95e31875b257058e482342095c72050e4ed56ae3
 Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/master/xdgmime-master.tar.gz
 Source2:	defaults.list
 # KDE Plasma overrides.
@@ -16,8 +16,6 @@ Source3:	mimeapps.list
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
-Patch0:		shared-mime-info-2.1-heic-magic.patch
-
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
@@ -60,17 +58,18 @@ Development files for %{name}.
 
 %prep
 %autosetup -p1
-
 tar -xzf %{SOURCE1}
-mv xdgmime-*/ xdgmime
+mv xdgmime-*/* xdgmime/
 
 %build
 %set_build_flags
 %make_build -C xdgmime
 # the updated mimedb is later owned as %%ghost to ensure proper file-ownership
 # it also asserts it is possible to build it
-%meson -Dupdate-mimedb=true -Dxdg-mime-path=./xdgmime/
-	
+%meson \
+    -Dupdate-mimedb=true \
+    -Dxdgmime-path=./xdgmime
+
 %meson_build
 
 %install
@@ -91,7 +90,7 @@ rm -rf %{buildroot}%{_datadir}/locale/*
 %meson_test
 
 %post
-/bin/touch --no-create %{_datadir}/mime/packages &>/dev/null ||:
+touch --no-create %{_datadir}/mime/packages &>/dev/null ||:
 
 %transfiletriggerin -- %{_datadir}/mime
 update-mime-database -n %{_datadir}/mime &> /dev/null ||:
@@ -102,12 +101,10 @@ update-mime-database -n %{_datadir}/mime &> /dev/null ||:
 %files -f %{name}.files
 %doc NEWS
 %{_bindir}/update-mime-database
-%dir %{_datadir}/mime
-%dir %{_datadir}/mime/packages
 %{_datadir}/applications/defaults.list
 %{_datadir}/applications/mimeapps.list
 %{_datadir}/mime/packages/freedesktop.org.xml
-%{_mandir}/man1/update-mime-database.1*
+%doc %{_mandir}/man1/update-mime-database.1*
 
 %files devel
 %{_datadir}/pkgconfig/shared-mime-info.pc
