@@ -1,8 +1,13 @@
 %global __requires_exclude ^/usr/bin/pkg-config$
 
+%ifnarch %{riscv}
+# (tpg) optimize it a bit
+%global optflags %{optflags} -Oz --rtlib=compiler-rt
+%endif
+
 Name:		shared-mime-info
 Version:	2.2
-Release:	1
+Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
