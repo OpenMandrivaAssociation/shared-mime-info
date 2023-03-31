@@ -7,7 +7,7 @@
 
 Name:		shared-mime-info
 Version:	2.2
-Release:	2
+Release:	3
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
