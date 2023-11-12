@@ -6,7 +6,7 @@
 %endif
 
 Name:		shared-mime-info
-Version:	2.3
+Version:	2.4
 Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
@@ -21,7 +21,6 @@ Source3:	mimeapps.list
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
-Patch0:		shared-mime-info-2.3-compile.patch
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
