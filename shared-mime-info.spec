@@ -7,17 +7,15 @@
 
 Name:		shared-mime-info
 Version:	2.4
-Release:	1
+Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
 URL:		http://freedesktop.org/Software/shared-mime-info
 Source0:	https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Tarball for https://gitlab.freedesktop.org/xdg/xdgmime/-/commit/95e31875b257058e482342095c72050e4ed56ae3
-Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/master/xdgmime-master.tar.gz
-Source2:	defaults.list
-# KDE Plasma overrides.
-Source3:	mimeapps.list
+# Tarball for https://gitlab.freedesktop.org/xdg/xdgmime
+Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/74a00cf508a24ba3b3bedeb4d4c05fd6d1211ead/xdgmime-74a00cf508a24ba3b3bedeb4d4c05fd6d1211ead.tar.bz2
+#Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/master/xdgmime-master.tar.gz
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
@@ -66,9 +64,15 @@ Development files for %{name}.
 tar -xzf %{SOURCE1}
 mv xdgmime-*/* xdgmime/
 
+cd xdgmime
+%meson
+
 %build
 %set_build_flags
-%make_build -C xdgmime
+cd xdgmime
+%meson_build
+cd ..
+
 # the updated mimedb is later owned as %%ghost to ensure proper file-ownership
 # it also asserts it is possible to build it
 %meson \
@@ -84,9 +88,6 @@ find %{buildroot}%{_datadir}/mime -type d \
 | sed -e "s|^%{buildroot}|%%dir |" > %{name}.files
 find %{buildroot}%{_datadir}/mime -type f -not -path "*/packages/*" \
 | sed -e "s|^%{buildroot}|%%ghost |" >> %{name}.files
-
-mkdir -p %{buildroot}%{_datadir}/applications
-install -m 644 %{SOURCE2} %{SOURCE3} %{buildroot}%{_datadir}/applications
 
 ## remove these bogus files
 rm -rf %{buildroot}%{_datadir}/locale/*
@@ -106,8 +107,6 @@ update-mime-database -n %{_datadir}/mime &> /dev/null ||:
 %files -f %{name}.files
 %doc NEWS
 %{_bindir}/update-mime-database
-%{_datadir}/applications/defaults.list
-%{_datadir}/applications/mimeapps.list
 %{_datadir}/mime/packages/freedesktop.org.xml
 %doc %{_mandir}/man1/update-mime-database.1*
 
