@@ -19,6 +19,7 @@ Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/74a00cf508a24ba3b3
 # Not used automatically, but useful to maintainers.
 # See comments in the file.
 Source100:	sanity-check
+BuildRequires:	gettext
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(glib-2.0)
