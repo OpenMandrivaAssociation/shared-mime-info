@@ -11,7 +11,7 @@ Release:	2
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
-URL:		http://freedesktop.org/Software/shared-mime-info
+URL:		https://freedesktop.org/Software/shared-mime-info
 Source0:	https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/%{version}/%{name}-%{version}.tar.bz2
 # Tarball for https://gitlab.freedesktop.org/xdg/xdgmime
 Source1:	https://gitlab.freedesktop.org/xdg/xdgmime/-/archive/74a00cf508a24ba3b3bedeb4d4c05fd6d1211ead/xdgmime-74a00cf508a24ba3b3bedeb4d4c05fd6d1211ead.tar.bz2
