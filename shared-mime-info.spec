@@ -28,6 +28,9 @@ BuildRequires:	itstool
 BuildRequires:	xmlto
 Requires(post):	/bin/sh
 
+%patchlist
+shared-mime-info-openat-missing-argument.patch
+
 %description
 This is the freedesktop.org shared MIME info database.
 
@@ -61,9 +64,10 @@ Conflicts:	%{name} < 1.3
 Development files for %{name}.
 
 %prep
-%autosetup -p1
+%setup
 tar -xzf %{SOURCE1}
 mv xdgmime-*/* xdgmime/
+%autopatch -p1
 
 cd xdgmime
 %meson
@@ -85,10 +89,18 @@ cd ..
 %install
 %meson_install
 
+WD="$(pwd)"
 find %{buildroot}%{_datadir}/mime -type d \
 | sed -e "s|^%{buildroot}|%%dir |" > %{name}.files
-find %{buildroot}%{_datadir}/mime -type f -not -path "*/packages/*" \
-| sed -e "s|^%{buildroot}|%%ghost |" >> %{name}.files
+# We used to do
+# find %{buildroot}%{_datadir}/mime -type f -not -path "*/packages/*" \
+# | sed -e "s|^%{buildroot}|%%ghost |" >> %{name}.files
+# here -- but this causes a funny hard to see breakage when building
+# inside a directory called "packages" (crossbuild...)
+cd %{buildroot}%{_datadir}/mime
+find . -type f |grep -v "/packages/" \
+| sed -e "s|^\.|%%ghost %{_datadir}/mime|" >> ${WD}/%{name}.files
+cd ${WD}
 
 ## remove these bogus files
 rm -rf %{buildroot}%{_datadir}/locale/*
