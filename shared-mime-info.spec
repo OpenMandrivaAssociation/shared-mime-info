@@ -1,10 +1,5 @@
 %global __requires_exclude ^/usr/bin/pkg-config$
 
-%ifnarch %{riscv}
-# (tpg) optimize it a bit
-%global optflags %{optflags} -Oz --rtlib=compiler-rt
-%endif
-
 Name:		shared-mime-info
 Version:	2.4
 Release:	2
