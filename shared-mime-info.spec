@@ -1,8 +1,8 @@
 %global __requires_exclude ^/usr/bin/pkg-config$
 
 Name:		shared-mime-info
-Version:	2.4
-Release:	2
+Version:	2.5.1
+Release:	1
 Summary:	Shared MIME-Info Specification
 Group:		Graphical desktop/Other
 License:	GPLv2+
@@ -60,24 +60,20 @@ Development files for %{name}.
 
 %prep
 %setup
-tar -xzf %{SOURCE1}
-mv xdgmime-*/* xdgmime/
+# xdgmime is a meson subproject (was a top-level submodule before 2.5)
+mkdir -p subprojects/xdgmime
+tar -xjf %{SOURCE1}
+mv xdgmime-*/* subprojects/xdgmime/
 %autopatch -p1
-
-cd xdgmime
-%meson
 
 %build
 %set_build_flags
-cd xdgmime
-%meson_build
-cd ..
 
 # the updated mimedb is later owned as %%ghost to ensure proper file-ownership
 # it also asserts it is possible to build it
+# xdgmime is built as a native meson subproject when tests are enabled
 %meson \
-    -Dupdate-mimedb=true \
-    -Dxdgmime-path=./xdgmime
+    -Dupdate-mimedb=true
 
 %meson_build
 
